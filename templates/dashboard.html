@@ -1,0 +1,288 @@
+     <!DOCTYPE html>
+     <html lang="en">
+     <head>
+         <meta charset="UTF-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>Document</title>
+     </head>
+     <body>
+     <h1 style="text-align: center;background-color: red;">Top 10 Data</h1>
+        <h1 id="lab1" value="{{highest_strike_rate.labels}}" style="display: none;">{{highest_strike_rate.labels}}</h1>
+            <h1 id="data1" value="{{highest_strike_rate.data}}" style="display: none;">{{highest_strike_rate.data}}</h1>
+
+            <h1 id="lab2" value="{{most_runs.labels}}" style="display: none;">{{most_runs.labels}}</h1>
+            <h1 id="data2" value="{{most_runs.data}}" style="display: none;">{{most_runs.data}}</h1>
+
+            <h1 id="lab3" value="{{highest_average.labels}}" style="display: none;">{{highest_average.labels}}</h1>
+            <h1 id="data3" value="{{highest_average.data}}" style="display: none;">{{highest_average.data}}</h1>
+
+           <h1 id="lab4" value="{{most_balls.labels}}" style="display: none;">{{most_balls.labels}}</h1>
+            <h1 id="data4" value="{{most_balls.data}}" style="display: none;">{{most_balls.data}}</h1>
+
+            <div style="display: flex; justify-content: space-around; margin: 1em 0 4em;">
+            <!-- <div style="width:45%;height:440px"> -->
+              <div style="width:45%;">
+              <canvas id="myChart" ></canvas>
+            </div>
+            <!-- <div style="width:45%;height:440px"> -->
+              <div style="width:45%;">
+              <canvas id="newChart"></canvas>
+            </div>
+          </diV>
+
+          <div style="display: flex; justify-content: space-around;">
+            <!-- <div style="width:45%;height:440px"> -->
+              <div style="width:45%; height: 350px;">
+              <canvas id="myChart1" ></canvas>
+              <h2 style="text-align: center;"> Highest Average Chart</h2>
+            </div>
+            <!-- <div style="width:45%;height:440px"> -->
+              <div style="width:45%; height: 350px;">
+              <canvas id="newChart1"></canvas>
+              <h2 style="text-align: center;">Most Balls Faced Chart</h2>
+            </div>
+          </diV>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     </body>
+     </html>
+     
+     
+
+{% block javascripts %}
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    
+    const labels1 = document.getElementById("lab1").innerText.replaceAll("[", "").replaceAll("]", "").replaceAll("'", "").split(",");
+    const values1 = document.getElementById("data1").innerText.replaceAll("[", "").replaceAll("]", "").split(",")
+    console.log(values1)
+
+    const data = {
+      labels: labels1,
+      datasets: [{
+        label: 'Highest Strike Rate Chart',
+        // backgroundColor: 'darkgrey',
+        backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(233, 212, 45)',
+      'rgb(45,34,56)',
+      'rgb(40,20,200',
+      'rgb(122,150,24)',
+      'rgb(222,23,45)',
+      'rgb(122,122,122)',
+      'rgb(203,24,134)',
+    ],
+    fill: false,
+    borderColor: 'rgb(75, 192, 192)',
+    tension: 0.1,    
+    data: values1
+      }]
+    };
+  
+    const config = {
+      type: 'line',
+      data: data,
+      options: {
+        scales: {x: { title: { display: true, text: '<------Players------>', font: { size:15, style:'italic' }, color: "black" }}, y: { title: { display:true, text: "<--No of orders-->", font: { size:15, style:'italic' }, color: "black"}}},
+        plugins: {
+            legend: {
+                labels: {
+                    // This more specific font property overrides the global property
+                    font: {
+                        size: 24
+                    },
+                    color: "black"
+                }
+            }
+        }
+    }
+    };
+  </script>
+
+
+<script>
+    const labels2 = document.getElementById("lab2").innerText.replaceAll("[", "").replaceAll("]", "").replaceAll("'", "").split(",");
+    const values = document.getElementById("data2").innerText.replaceAll("[", "").replaceAll("]", "").split(",")
+  
+    const data2 = {
+      labels: labels2,
+      datasets: [{
+        label: 'Highest Runs Chart',
+        backgroundColor: 'lightblue',
+        backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(233, 212, 45)',
+      'rgb(45,34,56)',
+      'rgb(40,20,200',
+      'rgb(122,150,24)',
+      'rgb(222,23,45)',
+      'rgb(122,122,122)',
+      'rgb(203,24,134)',
+    ],
+        data: values
+      }]
+    };
+  
+    const config2 = {
+      type: 'bar',
+      data: data2,
+      options: {
+        scales: {x: { title: { display: true, text: '<------Players------>', font: { size:15, style:'italic' }, color: "black" }}, y: { title: { display:true, text: "<--No of orders-->", font: { size:15, style:'italic' }, color: "black" }}},
+          plugins: {
+              legend: {
+                  labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                          size: 24
+                      },
+                      color: "black"
+                  }
+              }
+          }
+      }
+    };
+  </script>
+
+
+
+<script>
+    const labels3 = document.getElementById("lab3").innerText.replaceAll("[", "").replaceAll("]", "").replaceAll("'", "").split(",");
+    const values3 = document.getElementById("data3").innerText.replaceAll(/['"]+/g, '').replaceAll("[", "").replaceAll("]", "").split(",")
+  
+    const data3 = {
+      labels: labels3,
+      datasets: [{
+        label: 'Chart for highest average',
+        backgroundColor: [
+      'rgb(155, 199, 132)',
+      'rgb(154, 102, 235)',
+      'rgb(55, 05, 186)',
+      'rgb(23, 12, 45)',
+      'rgb(245,24,256)',
+      'rgb(40,20,20',
+      'rgb(222,50,24)',
+      'rgb(222,203,45)',
+      'rgb(102,102,122)',
+      'rgb(23,204,134)',
+    ],
+        borderColor: 'rgb(255, 255, 255)',
+        data: values3,
+      }]
+    };
+  
+    const config3 = {
+      type: 'doughnut',
+      data: data3,
+      options: {
+        
+        
+        // scales: {x: { title: { display: true, text: '<------Players------>', font: { size:15, style:'italic' }, color: "black" }}, y: { title: { display:true, text: "<--Total Value-->", font: { size:15, style:'italic' }, color: "black" }}},
+          plugins: {
+              legend: {
+                display:false,
+                  labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                          size: 22,
+                      },
+                      color: "#C81B17"
+                  }
+              }
+          },
+          responsive: true,
+    maintainAspectRatio: false
+      }
+    };
+  </script>
+
+<script>
+    const labels4 = document.getElementById("lab4").innerText.replaceAll("[", "").replaceAll("]", "").replaceAll("'", "").split(",");
+    const values4 = document.getElementById("data4").innerText.replaceAll("[", "").replaceAll("]", "").split(",")
+    
+    const data4 = {
+      labels: labels4,
+      datasets: [{
+        label: 'Chart for most balls faced',
+        backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(233, 212, 45)',
+      'rgb(45,34,56)',
+      'rgb(40,20,200',
+      'rgb(122,150,24)',
+      'rgb(222,23,45)',
+      'rgb(122,122,122)',
+      'rgb(203,24,134)',
+    ],
+        borderColor: 'red',
+        fill: false,
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.1,
+        data: values4
+      }]
+    };
+  
+    const config4 = {
+      type: 'pie',
+      data: data4,
+      options: {
+        // scales: {x: { title: { display: true, text: '<------Players------>', font: { size:15, style:'italic' }, color: "black" }}, y: { title: { display:true, text: "<--Total Sales-->", font: { size:15, style:'italic' }, color: "black" }}},
+          title: {
+            display: true,
+            text: 'Custom Chart Title'
+        },
+          
+          plugins: {
+              legend: {
+                display:false,
+                  labels: {
+                      // This more specific font property overrides the global property
+              
+                      font: {
+                          size: 22,
+                      },
+                      color: "#C81B17",
+                  }
+              }
+          },
+          responsive: true,
+    maintainAspectRatio: false
+      }
+    };
+  </script>
+
+
+
+
+  <script>
+    const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+    );
+    const newChart = new Chart(
+    document.getElementById('newChart'),
+    config2
+    );
+    const myChart1 = new Chart(
+    document.getElementById('myChart1'),
+    config3
+    );
+    const newChart1 = new Chart(
+    document.getElementById('newChart1'),
+    config4
+    );
+  </script>
+
+{% endblock javascripts %}
