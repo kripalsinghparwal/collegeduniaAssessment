@@ -22,6 +22,7 @@ def dashboard(request):
 
     if len(Players.objects.all())==0:
         for row in csvreader:
+            if row != ['batsman', 'total_runs', 'out', 'numberofballs', 'average', 'strikerate']:
                 Players.objects.get_or_create(name=row[0], total_runs=row[1], out=row[2], balls=row[3], average=row[4], strikerate=row[5])
 
     ### for highest strike rate ###
